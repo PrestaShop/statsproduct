@@ -38,7 +38,7 @@ class StatsProduct extends ModuleGraph
 	{
 		$this->name = 'statsproduct';
 		$this->tab = 'analytics_stats';
-		$this->version = 1.1;
+		$this->version = '1.2';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -46,7 +46,7 @@ class StatsProduct extends ModuleGraph
 
 		$this->displayName = $this->l('Product details');
 		$this->description = $this->l('Adds detailed statistics for each product to the Stats dashboard.');
-		$this->ps_versions_compliancy = array('min' => '1.5.6.1', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
