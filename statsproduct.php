@@ -229,7 +229,7 @@ class StatsProduct extends ModuleGraph
 						'type' => 'pie',
 						'option' => '3-'.$id_product
 					)).'</center><br />
-			<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" />'.$this->l('CSV Export').'</a>';
+			<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" alt=""/>'.$this->l('CSV Export').'</a>';
 			if ($total_bought)
 			{
 				$sales = $this->getSales($id_product);
@@ -264,8 +264,8 @@ class StatsProduct extends ModuleGraph
 					$this->html .= '
 						<tr>
 							<td>'.Tools::displayDate($sale['date_add'], null, false).'</td>
-							<td align="center"><a href="?tab=AdminOrders&id_order='.$sale['id_order'].'&vieworder&token='.$token_order.'">'.(int)$sale['id_order'].'</a></td>
-							<td align="center"><a href="?tab=AdminCustomers&id_customer='.$sale['id_customer'].'&viewcustomer&token='.$token_customer.'">'.(int)$sale['id_customer'].'</a></td>
+							<td class="text-center"><a href="?tab=AdminOrders&id_order='.$sale['id_order'].'&vieworder&token='.$token_order.'">'.(int)$sale['id_order'].'</a></td>
+							<td class="text-center"><a href="?tab=AdminCustomers&id_customer='.$sale['id_customer'].'&viewcustomer&token='.$token_customer.'">'.(int)$sale['id_customer'].'</a></td>
 							'.($has_attribute ? '<td>'.$sale['product_name'].'</td>' : '').'
 							<td>'.(int)$sale['product_quantity'].'</td>
 							<td>'.Tools::displayprice($sale['total'], $currency).'</td>
@@ -301,9 +301,9 @@ class StatsProduct extends ModuleGraph
 					foreach ($cross_selling as $selling)
 						$this->html .= '
 							<tr>
-								<td ><a href="?tab=AdminProducts&id_product='.(int)$selling['id_product'].'&addproduct&token='.$token_products.'">'.$selling['pname'].'</a></td>
-								<td align="center">'.(int)$selling['pqty'].'</td>
-								<td align="right">'.Tools::displayprice($selling['pprice'], $currency).'</td>
+								<td><a href="?tab=AdminProducts&id_product='.(int)$selling['id_product'].'&addproduct&token='.$token_products.'">'.$selling['pname'].'</a></td>
+								<td class="text-center">'.(int)$selling['pqty'].'</td>
+								<td class="text-right">'.Tools::displayprice($selling['pprice'], $currency).'</td>
 							</tr>';
 					$this->html .= '
 							</tbody>
