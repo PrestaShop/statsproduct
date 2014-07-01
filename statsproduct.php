@@ -172,14 +172,12 @@ class StatsProduct extends ModuleGraph
 			<h4>'.$this->l('Guide').'</h4>
 			<div class="alert alert-warning">
 				<h4>'.$this->l('Number of purchases compared to number of views').'</h4>
-				<p>
 					'.$this->l('After choosing a category and selecting a product, informational graphs will appear.').'
 					<ul>
 						<li class="bullet">'.$this->l('If you notice that a product is often purchased but viewed infrequently, you should display it more prominently in your Front Office.').'</li>
 						<li class="bullet">'.$this->l('On the other hand, if a product has many views but is not often purchased, we advise you to check or modify this product\'s information, description and photography again, see if you can find something better.').'
 						</li>
 					</ul>
-				</p>
 			</div>';
 		if ($id_product = (int)Tools::getValue('id_product'))
 		{
@@ -316,9 +314,9 @@ class StatsProduct extends ModuleGraph
 		{
 			$categories = Category::getCategories((int)$this->context->language->id, true, false);
 			$this->html .= '
-			<form action="" method="post" id="categoriesForm" class="form-horizontal">
+			<form action="#" method="post" id="categoriesForm" class="form-horizontal">
 				<div class="row row-margin-bottom">
-					<label class="control-label col-lg-3" for="id_category">
+					<label class="control-label col-lg-3">
 						<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="'.$this->l('Click on a product to access its statistics!').'">
 							'.$this->l('Choose a category').'
 						</span>
@@ -334,7 +332,7 @@ class StatsProduct extends ModuleGraph
 				</div>
 			</form>
 			<h4>'.$this->l('Products available').'</h4>
-			<table class="table" border="0" cellspacing="0" cellspacing="0">
+			<table class="table" style="border: 0; cellspacing: 0;">
 				<thead>
 					<tr>
 						<th>
@@ -355,7 +353,7 @@ class StatsProduct extends ModuleGraph
 				<tr>
 					<td>'.$product['reference'].'</td>
 					<td>
-						<a href="'.AdminController::$currentIndex.'&token='.Tools::safeOutput(Tools::getValue('token')).'&module='.$this->name.'&id_product='.$product['id_product'].'">'.$product['name'].'</a>
+						<a href="'.Tools::safeOutput(AdminController::$currentIndex.'&token='.Tools::getValue('token').'&module='.$this->name.'&id_product='.$product['id_product']).'">'.$product['name'].'</a>
 					</td>
 					<td>'.$product['quantity'].'</td>
 				</tr>';
@@ -363,7 +361,7 @@ class StatsProduct extends ModuleGraph
 			$this->html .= '
 				</tbody>
 			</table>
-			<a class="btn btn-default export-csv" href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1">
+			<a class="btn btn-default export-csv" href="'.Tools::safeOutput($_SERVER['REQUEST_URI'].'&export=1').'">
 				<i class="icon-cloud-upload"></i> '.$this->l('CSV Export').'
 			</a>';
 		}
