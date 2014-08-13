@@ -373,7 +373,7 @@ class StatsProduct extends ModuleGraph
 	{
 		$options = explode('-', $option);
 		if (count($options) === 2)
-			list($this->_option, $this->_id_product) = $options;
+			list($this->option, $this->id_product) = $options;
 		else
 			$this->option = $option;
 		$date_between = $this->getDate();
