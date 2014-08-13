@@ -223,17 +223,16 @@ class StatsProduct extends ModuleGraph
 				</div>
 			</div>';
 			if ($has_attribute = $product->hasAttributes() && $total_bought)
-				$this->html .= '<h3 class="space">'.$this->l('Attribute sales distribution').'</h3><center>'.$this->engine(array(
-						'type' => 'pie',
-						'option' => '3-'.$id_product
-					)).'</center><br />
-			<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" alt=""/>'.$this->l('CSV Export').'</a>';
+				$this->html .= '
+				<h3 class="space">'.$this->l('Attribute sales distribution').'</h3>
+				<center>'.$this->engine(array('type' => 'pie', 'option' => '3-'.$id_product)).'</center><br />
+				<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" alt=""/>'.$this->l('CSV Export').'</a>';
 			if ($total_bought)
 			{
 				$sales = $this->getSales($id_product);
 				$this->html .= '
 				<h4>'.$this->l('Sales').'</h4>
-				<div style="overflow-y: scroll; height: '.min(400, (count($sales) + 1) * 32).'px;">
+				<div style="overflow-y:scroll;height:'.min(400, (count($sales) + 1) * 32).'px">
 					<table class="table">
 						<thead>
 							<tr>
@@ -278,19 +277,18 @@ class StatsProduct extends ModuleGraph
 				{
 					$this->html .= '
 					<h4>'.$this->l('Cross selling').'</h4>
-					<div style="overflow-y: scroll; height: 200px;">
-						<h4>'.$this->l('Cross selling').'</h4>
+					<div style="overflow-y:scroll;height:200px">
 						<table class="table">
 							<thead>
 								<tr>
 									<th>
-										<span class="title_box  active">'.$this->l('Product name').'</span>
+										<span class="title_box active">'.$this->l('Product name').'</span>
 									</th>
 									<th>
-										<span class="title_box  active">'.$this->l('Quantity sold').'</span>
+										<span class="title_box active">'.$this->l('Quantity sold').'</span>
 									</th>
 									<th>
-										<span class="title_box  active">'.$this->l('Average price').'</span>
+										<span class="title_box active">'.$this->l('Average price').'</span>
 									</th>
 								</tr>
 							</thead>
