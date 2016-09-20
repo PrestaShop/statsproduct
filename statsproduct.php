@@ -109,7 +109,7 @@ class StatsProduct extends ModuleGraph
 				'.Shop::addSqlAssociation('product', 'p').'
 				'.(Tools::getValue('id_category') ? 'LEFT JOIN `'._DB_PREFIX_.'category_product` cp ON p.`id_product` = cp.`id_product`' : '').'
 				WHERE pl.`id_lang` = '.(int)$id_lang.'
-					'.(Tools::getValue('id_category') ? 'AND cp.id_category = '.(int)Tools::getValue('id_category') : '').'
+					'.(Tools::getValue('id_category') ? 'AND cp.id_category = '.(int)Tools::getValue('id_category') : '').' AND p.state = '. Product::STATE_SAVED . '
 				ORDER BY pl.`name`';
 
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
