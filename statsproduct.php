@@ -39,15 +39,15 @@ class statsproduct extends ModuleGraph
     {
         $this->name = 'statsproduct';
         $this->tab = 'analytics_stats';
-        $this->version = '1.4.0';
+        $this->version = '2.0.0';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
         parent::__construct();
 
-        $this->displayName = $this->l('Product details');
-        $this->description = $this->l('Adds detailed statistics for each product to the Stats dashboard.');
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->displayName = $this->trans('Product details', array(), 'Modules.Statsproduct.Admin');
+        $this->description = $this->trans('Adds detailed statistics for each product to the Stats dashboard.', array(), 'Modules.Statsproduct.Admin');
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function install()
@@ -172,13 +172,13 @@ class statsproduct extends ModuleGraph
 			<div class="panel-heading">
 				'.$this->displayName.'
 			</div>
-			<h4>'.$this->l('Guide').'</h4>
+			<h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
 			<div class="alert alert-warning">
-				<h4>'.$this->l('Number of purchases compared to number of views').'</h4>
-					'.$this->l('After choosing a category and selecting a product, informational graphs will appear.').'
+				<h4>'.$this->trans('Number of purchases compared to number of views', array(), 'Modules.Statsproduct.Admin').'</h4>
+					'.$this->trans('After choosing a category and selecting a product, informational graphs will appear.', array(), 'Modules.Statsproduct.Admin').'
 					<ul>
-						<li class="bullet">'.$this->l('If you notice that a product is often purchased but viewed infrequently, you should display it more prominently in your Front Office.').'</li>
-						<li class="bullet">'.$this->l('On the other hand, if a product has many views but is not often purchased, we advise you to check or modify this product\'s information, description and photography again, see if you can find something better.').'
+						<li class="bullet">'.$this->trans('If you notice that a product is often purchased but viewed infrequently, you should display it more prominently in your Front Office.', array(), 'Modules.Statsproduct.Admin').'</li>
+						<li class="bullet">'.$this->trans('On the other hand, if a product has many views but is not often purchased, we advise you to check or modify this product\'s information, description and photography again, see if you can find something better.', array(), 'Modules.Statsproduct.Admin').'
 						</li>
 					</ul>
 			</div>';
@@ -201,7 +201,7 @@ class statsproduct extends ModuleGraph
             $total_bought = $this->getTotalBought($product->id);
             $total_sales = $this->getTotalSales($product->id);
             $total_viewed = $this->getTotalViewed($product->id);
-            $this->html .= '<h4>'.$product->name.' - '.$this->l('Details').'</h4>
+            $this->html .= '<h4>'.$product->name.' - '.$this->trans('Details', array(), 'Modules.Statsproduct.Admin').'</h4>
 			<div class="row row-margin-bottom">
 				<div class="col-lg-12">
 					<div class="col-lg-8">
@@ -213,46 +213,46 @@ class statsproduct extends ModuleGraph
 					</div>
 					<div class="col-lg-4">
 						<ul class="list-unstyled">
-							<li>'.$this->l('Total bought').' '.$total_bought.'</li>
-							<li>'.$this->l('Sales (tax excluded)').' '.Tools::displayprice($total_sales, $currency).'</li>
-							<li>'.$this->l('Total viewed').' '.$total_viewed.'</li>
-							<li>'.$this->l('Conversion rate').' '.number_format($total_viewed ? $total_bought / $total_viewed : 0, 2).'</li>
+							<li>'.$this->trans('Total bought', array(), 'Modules.Statsproduct.Admin').' '.$total_bought.'</li>
+							<li>'.$this->trans('Sales (tax excluded)', array(), 'Modules.Statsproduct.Admin').' '.Tools::displayprice($total_sales, $currency).'</li>
+							<li>'.$this->trans('Total Viewed', array(), 'Modules.Statsproduct.Admin').' '.$total_viewed.'</li>
+							<li>'.$this->trans('Conversion rate', array(), 'Modules.Statsproduct.Admin').' '.number_format($total_viewed ? $total_bought / $total_viewed : 0, 2).'</li>
 						</ul>
 						<a class="btn btn-default export-csv" href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=1">
-							<i class="icon-cloud-upload"></i> '.$this->l('CSV Export').'
+							<i class="icon-cloud-upload"></i> '.$this->trans('CSV Export', array(), 'Modules.Statsproduct.Admin').'
 						</a>
 					</div>
 				</div>
 			</div>';
             if ($has_attribute = $product->hasAttributes() && $total_bought) {
                 $this->html .= '
-				<h3 class="space">'.$this->l('Attribute sales distribution').'</h3>
+				<h3 class="space">'.$this->trans('Attribute sales distribution', array(), 'Modules.Statsproduct.Admin').'</h3>
 				<center>'.$this->engine(array('type' => 'pie', 'option' => '3-'.$id_product)).'</center><br />
-				<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" alt=""/>'.$this->l('CSV Export').'</a>';
+				<a href="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'&export=1&exportType=2"><img src="../img/admin/asterisk.gif" alt=""/>'.$this->trans('CSV Export', array(), 'Modules.Statsproduct.Admin').'</a>';
             }
             if ($total_bought) {
                 $sales = $this->getSales($id_product);
                 $this->html .= '
-				<h4>'.$this->l('Sales').'</h4>
+				<h4>'.$this->trans('Sales', array(), 'Admin.Global').'</h4>
 				<div style="overflow-y:scroll;height:'.min(400, (count($sales) + 1) * 32).'px">
 					<table class="table">
 						<thead>
 							<tr>
 								<th>
-									<span class="title_box  active">'.$this->l('Date').'</span>
+									<span class="title_box  active">'.$this->trans('Date', array(), 'Admin.Global').'</span>
 								</th>
 								<th>
-									<span class="title_box  active">'.$this->l('Order').'</span>
+									<span class="title_box  active">'.$this->trans('Order', array(), 'Admin.Global').'</span>
 								</th>
 								<th>
-									<span class="title_box  active">'.$this->l('Customer').'</span>
+									<span class="title_box  active">'.$this->trans('Customer', array(), 'Admin.Global').'</span>
 								</th>
-								'.($has_attribute ? '<th><span class="title_box  active">'.$this->l('Attribute').'</span></th>' : '').'
+								'.($has_attribute ? '<th><span class="title_box  active">'.$this->trans('Attribute', array(), 'Admin.Global').'</span></th>' : '').'
 								<th>
-									<span class="title_box  active">'.$this->l('Quantity').'</span>
+									<span class="title_box  active">'.$this->trans('Quantity', array(), 'Admin.Global').'</span>
 								</th>
 								<th>
-									<span class="title_box  active">'.$this->l('Price').'</span>
+									<span class="title_box  active">'.$this->trans('Price', array(), 'Admin.Global').'</span>
 								</th>
 							</tr>
 						</thead>
@@ -278,19 +278,19 @@ class statsproduct extends ModuleGraph
                 $cross_selling = $this->getCrossSales($id_product, $this->context->language->id);
                 if (count($cross_selling)) {
                     $this->html .= '
-					<h4>'.$this->l('Cross selling').'</h4>
+					<h4>'.$this->trans('Cross selling', array(), 'Modules.Statsproduct.Admin').'</h4>
 					<div style="overflow-y:scroll;height:200px">
 						<table class="table">
 							<thead>
 								<tr>
 									<th>
-										<span class="title_box active">'.$this->l('Product name').'</span>
+										<span class="title_box active">'.$this->trans('Product name', array(), 'Admin.ShopParameters.Feature').'</span>
 									</th>
 									<th>
-										<span class="title_box active">'.$this->l('Quantity sold').'</span>
+										<span class="title_box active">'.$this->trans('Quantity sold', array(), 'Admin.Global').'</span>
 									</th>
 									<th>
-										<span class="title_box active">'.$this->l('Average price').'</span>
+										<span class="title_box active">'.$this->trans('Average price', array(), 'Admin.Global').'</span>
 									</th>
 								</tr>
 							</thead>
@@ -316,13 +316,13 @@ class statsproduct extends ModuleGraph
 			<form action="#" method="post" id="categoriesForm" class="form-horizontal">
 				<div class="row row-margin-bottom">
 					<label class="control-label col-lg-3">
-						<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="'.$this->l('Click on a product to access its statistics!').'">
-							'.$this->l('Choose a category').'
+						<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="'.$this->trans('Click on a product to access its statistics!', array(), 'Modules.Statsproduct.Admin').'">
+							'.$this->trans('Choose a category', array(), 'Modules.Statsproduct.Admin').'
 						</span>
 					</label>
 					<div class="col-lg-3">
 						<select name="id_category" onchange="$(\'#categoriesForm\').submit();">
-							<option value="0">'.$this->l('All').'</option>';
+							<option value="0">'.$this->trans('All', array(), 'Admin.Global').'</option>';
             foreach ($categories as $category) {
                 $this->html .= '<option value="'.$category['id_category'].'"'.($id_category == $category['id_category'] ? ' selected="selected"' : '').'>'.$category['name'].'</option>';
             }
@@ -331,18 +331,18 @@ class statsproduct extends ModuleGraph
 					</div>
 				</div>
 			</form>
-			<h4>'.$this->l('Products available').'</h4>
+			<h4>'.$this->trans('Products available', array(), 'Modules.Statsproduct.Admin').'</h4>
 			<table class="table" style="border: 0; cellspacing: 0;">
 				<thead>
 					<tr>
 						<th>
-							<span class="title_box  active">'.$this->l('Reference').'</span>
+							<span class="title_box  active">'.$this->trans('Reference', array(), 'Admin.Global').'</span>
 						</th>
 						<th>
-							<span class="title_box  active">'.$this->l('Name').'</span>
+							<span class="title_box  active">'.$this->trans('Name', array(), 'Admin.Global').'</span>
 						</th>
 						<th>
-							<span class="title_box  active">'.$this->l('Available quantity for sale').'</span>
+							<span class="title_box  active">'.$this->trans('Available quantity for sale', array(), 'Admin.Global').'</span>
 						</th>
 					</tr>
 				</thead>
@@ -363,7 +363,7 @@ class statsproduct extends ModuleGraph
 				</tbody>
 			</table>
 			<a class="btn btn-default export-csv" href="'.Tools::safeOutput($_SERVER['REQUEST_URI'].'&export=1').'">
-				<i class="icon-cloud-upload"></i> '.$this->l('CSV Export').'
+				<i class="icon-cloud-upload"></i> '.$this->trans('CSV Export', array(), 'Modules.Statsproduct.Admin').'
 			</a>';
         }
 
@@ -381,9 +381,9 @@ class statsproduct extends ModuleGraph
         $date_between = $this->getDate();
         switch ($this->option) {
             case 1:
-                $this->_titles['main'][0] = $this->l('Popularity');
-                $this->_titles['main'][1] = $this->l('Sales');
-                $this->_titles['main'][2] = $this->l('Visits (x100)');
+                $this->_titles['main'][0] = $this->trans('Popularity', array(), 'Modules.Statsproduct.Admin');
+                $this->_titles['main'][1] = $this->trans('Sales', array(), 'Admin.Global');
+                $this->_titles['main'][2] = $this->trans('Visits (x100)', array(), 'Modules.Statsproduct.Admin');
                 $this->query[0] = 'SELECT o.`date_add`, SUM(od.`product_quantity`) AS total
 						FROM `'._DB_PREFIX_.'order_detail` od
 						LEFT JOIN `'._DB_PREFIX_.'orders` o ON o.`id_order` = od.`id_order`
@@ -415,13 +415,13 @@ class statsproduct extends ModuleGraph
 							AND o.valid = 1
 							AND o.`date_add` BETWEEN '.$date_between.'
 						GROUP BY od.`product_attribute_id`';
-                $this->_titles['main'] = $this->l('Attributes');
+                $this->_titles['main'] = $this->trans('Attributes', array(), 'Admin.Global');
                 break;
 
             case 42:
-                $this->_titles['main'][1] = $this->l('Reference');
-                $this->_titles['main'][2] = $this->l('Name');
-                $this->_titles['main'][3] = $this->l('Stock');
+                $this->_titles['main'][1] = $this->trans('Reference', array(), 'Admin.Global');
+                $this->_titles['main'][2] = $this->trans('Name', array(), 'Admin.Global');
+                $this->_titles['main'][3] = $this->trans('Stock', array(), 'Modules.Statsproduct.Admin');
                 break;
         }
     }
