@@ -297,13 +297,15 @@ class StatsProduct extends ModuleGraph
 							</thead>
 						<tbody>';
 					$token_products = Tools::getAdminToken('AdminProducts'.(int)Tab::getIdFromClassName('AdminProducts').(int)$this->context->employee->id);
-					foreach ($cross_selling as $selling)
+					foreach ($cross_selling as $selling) {
+						$urlParams = array('id_product' => (int)$selling['id_product'], 'updateproduct' => 1, 'token' => $token_products);
 						$this->html .= '
 							<tr>
-								<td><a href="?tab=AdminProducts&id_product='.(int)$selling['id_product'].'&addproduct&token='.$token_products.'">'.$selling['pname'].'</a></td>
+								<td><a href="' . preg_replace("/\\?.*$/", '?tab=AdminProducts&id_product=' . (int)$selling['id_product'] . '&updateproduct&token=' . $token_products, $this->context->link->getAdminLink('AdminProducts', true, $urlParams)) . '">' . $selling['pname'] . '</a></td>
 								<td class="text-center">'.(int)$selling['pqty'].'</td>
 								<td class="text-right">'.Tools::displayprice($selling['pprice'], $currency).'</td>
 							</tr>';
+					}
 					$this->html .= '
 							</tbody>
 						</table>
