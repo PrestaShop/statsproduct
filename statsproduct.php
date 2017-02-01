@@ -284,7 +284,7 @@ class statsproduct extends ModuleGraph
 							<thead>
 								<tr>
 									<th>
-										<span class="title_box active">'.$this->trans('Product name', array(), 'Admin.ShopParameters.Feature').'</span>
+										<span class="title_box active">'.$this->trans('Product name', array(), 'Admin.Shopparameters.Feature').'</span>
 									</th>
 									<th>
 										<span class="title_box active">'.$this->trans('Quantity sold', array(), 'Admin.Global').'</span>
