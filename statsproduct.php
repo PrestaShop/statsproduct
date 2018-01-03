@@ -157,6 +157,7 @@ class statsproduct extends ModuleGraph
     {
         $id_category = (int)Tools::getValue('id_category');
         $currency = Context::getContext()->currency;
+	$id_lang = $this->context->language->id;
 
         if (Tools::getValue('export')) {
             if (!Tools::getValue('exportType')) {
@@ -201,7 +202,7 @@ class statsproduct extends ModuleGraph
             $total_bought = $this->getTotalBought($product->id);
             $total_sales = $this->getTotalSales($product->id);
             $total_viewed = $this->getTotalViewed($product->id);
-            $this->html .= '<h4>'.$product->name.' - '.$this->trans('Details', array(), 'Modules.Statsproduct.Admin').'</h4>
+            $this->html .= '<h4>'.$product->name[$id_lang].' - '.$this->trans('Details', array(), 'Modules.Statsproduct.Admin').'</h4>
 			<div class="row row-margin-bottom">
 				<div class="col-lg-12">
 					<div class="col-lg-8">
