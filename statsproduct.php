@@ -111,9 +111,9 @@ class StatsProduct extends ModuleGraph
 				WHERE pl.`id_lang` = '.(int)$id_lang.'
 					'.(Tools::getValue('id_category') ? 'AND cp.id_category = '.(int)Tools::getValue('id_category') : '');
 		if (version_compare(_PS_VERSION_, '1.7.0.0', '>=')) {
-			$sql .= ' AND p.state = ' . Product::STATE_SAVED . ' ';
+			$sql .= ' AND p.state = ' . Product::STATE_SAVED . ';
 		}
-		$sql .= 'ORDER BY pl.`name`';
+		$sql .= ' ORDER BY pl.`name`';
 
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 	}
