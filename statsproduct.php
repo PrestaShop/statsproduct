@@ -157,7 +157,7 @@ class statsproduct extends ModuleGraph
     {
         $id_category = (int)Tools::getValue('id_category');
         $currency = Context::getContext()->currency;
-	$id_lang = $this->context->language->id;
+        $id_lang = $this->context->language->id;
 
         if (Tools::getValue('export')) {
             if (!Tools::getValue('exportType')) {
