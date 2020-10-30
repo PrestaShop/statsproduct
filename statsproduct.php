@@ -46,7 +46,7 @@ class statsproduct extends ModuleGraph
         parent::__construct();
 
         $this->displayName = $this->trans('Product details', array(), 'Modules.Statsproduct.Admin');
-        $this->description = $this->trans('Adds detailed statistics for each product to the Stats dashboard.', array(), 'Modules.Statsproduct.Admin');
+        $this->description = $this->trans('Enrich your stats, add detailed statistics for each product of your catalog.', array(), 'Modules.Statsproduct.Admin');
         $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
     }
 
