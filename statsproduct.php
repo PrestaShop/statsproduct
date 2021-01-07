@@ -121,7 +121,7 @@ class statsproduct extends ModuleGraph
 
 	private function getSales($id_product)
 	{
-		$sql = 'SELECT o.date_add, o.id_order, o.id_customer, od.product_quantity, (od.product_price * od.product_quantity) as total, od.tax_name, od.product_name
+		$sql = 'SELECT o.date_add, o.id_order, o.id_customer, od.product_quantity, (od.unit_price_tax_excl * od.product_quantity) as total, od.tax_name, od.product_name
 				FROM `'._DB_PREFIX_.'orders` o
 				LEFT JOIN `'._DB_PREFIX_.'order_detail` od ON o.id_order = od.id_order
 				WHERE o.date_add BETWEEN '.$this->getDate().'
@@ -134,7 +134,7 @@ class statsproduct extends ModuleGraph
 
     private function getCrossSales($id_product, $id_lang)
     {
-        $sql = 'SELECT pl.name as pname, pl.id_product, SUM(od.product_quantity) as pqty, AVG(od.product_price) as pprice
+        $sql = 'SELECT pl.name as pname, pl.id_product, SUM(od.product_quantity) as pqty, AVG(od.unit_price_tax_excl) as pprice
 				FROM `'._DB_PREFIX_.'orders` o
 				LEFT JOIN `'._DB_PREFIX_.'order_detail` od ON o.id_order = od.id_order
 				LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (pl.id_product = od.product_id AND pl.id_lang = '.(int)$id_lang.Shop::addSqlRestrictionOnLang('pl').')
