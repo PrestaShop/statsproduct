@@ -31,7 +31,7 @@ if (!defined('_PS_VERSION_')) {
 class statsproduct extends ModuleGraph
 {
     private $html = '';
-    private $query = '';
+    private $query = [];
     private $option = 0;
     private $id_product = 0;
 
