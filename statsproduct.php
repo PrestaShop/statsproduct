@@ -387,6 +387,7 @@ class statsproduct extends ModuleGraph
                 $this->_titles['main'][0] = $this->trans('Popularity', array(), 'Modules.Statsproduct.Admin');
                 $this->_titles['main'][1] = $this->trans('Sales', array(), 'Admin.Global');
                 $this->_titles['main'][2] = $this->trans('Visits (x100)', array(), 'Modules.Statsproduct.Admin');
+		$this->query = [];
                 $this->query[0] = 'SELECT o.`date_add`, SUM(od.`product_quantity`) AS total
 						FROM `'._DB_PREFIX_.'order_detail` od
 						LEFT JOIN `'._DB_PREFIX_.'orders` o ON o.`id_order` = od.`id_order`
