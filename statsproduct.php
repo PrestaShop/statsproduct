@@ -445,7 +445,7 @@ class statsproduct extends ModuleGraph
             $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query);
             foreach ($result as $row) {
                 $this->_values[] = $row['total'];
-                $this->_legend[] = $row['product_name'];;
+                $this->_legend[] = $row['product_name'];
             }
         }
     }
