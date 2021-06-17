@@ -410,7 +410,7 @@ class statsproduct extends ModuleGraph
                 break;
 
             case 3:
-                $this->query = 'SELECT product_attribute_id, SUM(od.`product_quantity`) AS total
+                $this->query = 'SELECT product_attribute_id, SUM(od.`product_quantity`) AS total, od.product_name AS product_name
 						FROM `'._DB_PREFIX_.'orders` o
 						LEFT JOIN `'._DB_PREFIX_.'order_detail` od ON o.`id_order` = od.`id_order`
 						WHERE od.`product_id` = '.(int)$this->id_product.'
@@ -444,30 +444,31 @@ class statsproduct extends ModuleGraph
         } else {
             $product = new Product($this->id_product, false, (int)$this->getLang());
 
-            $comb_array = array();
-            $assoc_names = array();
-            $combinations = $product->getAttributeCombinations((int)$this->getLang());
-            foreach ($combinations as $combination) {
-                $comb_array[$combination['id_product_attribute']][] = array(
-                    'group' => $combination['group_name'],
-                    'attr' => $combination['attribute_name']
-                );
-            }
-            foreach ($comb_array as $id_product_attribute => $product_attribute) {
-                $list = '';
-                foreach ($product_attribute as $attribute) {
-                    $list .= trim($attribute['group']).' - '.trim($attribute['attr']).', ';
-                }
-                $list = rtrim($list, ', ');
-                $assoc_names[$id_product_attribute] = $list;
-            }
-
             $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query);
             foreach ($result as $row) {
                 $this->_values[] = $row['total'];
-                $this->_legend[] = @$assoc_names[$row['product_attribute_id']];
+                $this->_legend[] = $this->removeProductNameInCombinationName($product->name, $row['product_name']);
             }
         }
+    }
+
+    /**
+     * @param string $productName
+     * @param string $combinationName
+     *
+     * @return string
+     */
+    protected function removeProductNameInCombinationName(string $productName, string $combinationName): string{
+        $combinationFullNameSepatators = ['-', ':'];
+        $combinationName = str_replace($productName, '', $combinationName);
+        $combinationName = trim($combinationName);
+
+        if(in_array($combinationName[0], $combinationFullNameSepatators)){
+            $combinationName = ltrim($combinationName, $combinationName[0]);
+        }
+
+        return trim($combinationName);
+
     }
 
     protected function setAllTimeValues($layers)
