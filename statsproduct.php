@@ -458,7 +458,8 @@ class statsproduct extends ModuleGraph
      *
      * @return string
      */
-    protected function removeProductNameInCombinationName(string $productName, string $combinationName): string{
+    protected function removeProductNameInCombinationName(string $productName, string $combinationName): string
+    {
         $combinationFullNameSepatators = ['-', ':'];
         $combinationName = str_replace($productName, '', $combinationName);
         $combinationName = trim($combinationName);
