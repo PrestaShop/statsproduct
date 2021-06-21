@@ -442,34 +442,12 @@ class statsproduct extends ModuleGraph
         } elseif ($this->option != 3) {
             $this->setDateGraph($layers, true);
         } else {
-            $product = new Product($this->id_product, false, (int)$this->getLang());
-
             $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query);
             foreach ($result as $row) {
                 $this->_values[] = $row['total'];
-                $this->_legend[] = $this->removeProductNameInCombinationName($product->name, $row['product_name']);
+                $this->_legend[] = $row['product_name'];
             }
         }
-    }
-
-    /**
-     * @param string $productName
-     * @param string $combinationName
-     *
-     * @return string
-     */
-    protected function removeProductNameInCombinationName(string $productName, string $combinationName): string
-    {
-        $combinationFullNameSepatators = ['-', ':'];
-        $combinationName = str_replace($productName, '', $combinationName);
-        $combinationName = trim($combinationName);
-
-        if(in_array($combinationName[0], $combinationFullNameSepatators)){
-            $combinationName = ltrim($combinationName, $combinationName[0]);
-        }
-
-        return trim($combinationName);
-
     }
 
     protected function setAllTimeValues($layers)
