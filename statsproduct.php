@@ -217,7 +217,7 @@ class statsproduct extends ModuleGraph
 					<div class="col-lg-4">
 						<ul class="list-unstyled">
 							<li>'.$this->trans('Total bought', array(), 'Modules.Statsproduct.Admin').' '.$total_bought.'</li>
-							<li>'.$this->trans('Sales (tax excluded)', array(), 'Modules.Statsproduct.Admin').' '.Tools::displayprice($total_sales, $currency).'</li>
+							<li>' . $this->trans('Sales (tax excluded)', array(), 'Modules.Statsproduct.Admin'). ' '. $this->context->getCurrentLocale()->formatPrice($total_sales, $currency->iso_code) . '</li>
 							<li>'.$this->trans('Total Viewed', array(), 'Modules.Statsproduct.Admin').' '.$total_viewed.'</li>
 							<li>'.$this->trans('Conversion rate', array(), 'Modules.Statsproduct.Admin').' '.number_format($total_viewed ? $total_bought / $total_viewed : 0, 2).'</li>
 						</ul>
@@ -270,7 +270,7 @@ class statsproduct extends ModuleGraph
 							<td class="text-center"><a href="?tab=AdminCustomers&id_customer='.$sale['id_customer'].'&viewcustomer&token='.$token_customer.'">'.(int)$sale['id_customer'].'</a></td>
 							'.($has_attribute ? '<td>'.$sale['product_name'].'</td>' : '').'
 							<td>'.(int)$sale['product_quantity'].'</td>
-							<td>'.Tools::displayprice($sale['total'], $currency).'</td>
+							<td>' . $this->context->getCurrentLocale()->formatPrice($sale['total'], $currency->iso_code) . '</td>
 						</tr>';
                 }
                 $this->html .= '
@@ -304,7 +304,7 @@ class statsproduct extends ModuleGraph
 							<tr>
 								<td><a href="?tab=AdminProducts&id_product='.(int)$selling['id_product'].'&addproduct&token='.$token_products.'">'.$selling['pname'].'</a></td>
 								<td class="text-center">'.(int)$selling['pqty'].'</td>
-								<td class="text-right">'.Tools::displayprice($selling['pprice'], $currency).'</td>
+								<td class="text-right">' . $this->context->getCurrentLocale()->formatPrice($selling['pprice'], $currency->iso_code) . '</td>
 							</tr>';
                     }
                     $this->html .= '
