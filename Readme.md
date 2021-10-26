@@ -2,7 +2,7 @@
 
 ## About
 
-Adds detailed statistics for each product to the Stats dashboard.
+Enrich your stats, add detailed statistics for each product of your catalog.
 
 ## Reporting issues
 
