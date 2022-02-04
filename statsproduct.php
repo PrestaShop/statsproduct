@@ -65,7 +65,7 @@ class statsproduct extends ModuleGraph
 					AND o.valid = 1
 					AND o.`date_add` BETWEEN ' . $date_between;
 
-        return (int) Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
+        return (int) Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->getValue($sql);
     }
 
     public function getTotalSales($id_product)
@@ -79,7 +79,7 @@ class statsproduct extends ModuleGraph
 					AND o.valid = 1
 					AND o.`date_add` BETWEEN ' . $date_between;
 
-        return (float) Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
+        return (float) Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->getValue($sql);
     }
 
     public function getTotalViewed($id_product)
@@ -95,7 +95,7 @@ class statsproduct extends ModuleGraph
 					AND p.`id_object` = ' . (int) $id_product . '
 					AND dr.`time_start` BETWEEN ' . $date_between . '
 					AND dr.`time_end` BETWEEN ' . $date_between;
-        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
+        $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->getRow($sql);
 
         return isset($result['total']) ? $result['total'] : 0;
     }
@@ -115,7 +115,7 @@ class statsproduct extends ModuleGraph
         }
         $sql .= ' ORDER BY pl.`name`';
 
-        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+        return Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($sql);
     }
 
     private function getSales($id_product)
@@ -128,7 +128,7 @@ class statsproduct extends ModuleGraph
 					AND o.valid = 1
 					AND od.product_id = ' . (int) $id_product;
 
-        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+        return Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($sql);
     }
 
     private function getCrossSales($id_product, $id_lang)
@@ -152,7 +152,7 @@ class statsproduct extends ModuleGraph
 				GROUP BY od.product_id
 				ORDER BY pqty DESC';
 
-        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+        return Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($sql);
     }
 
     public function hookDisplayAdminStatsModules()
@@ -442,7 +442,7 @@ class statsproduct extends ModuleGraph
         } elseif ($this->option != 3) {
             $this->setDateGraph($layers, true);
         } else {
-            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query);
+            $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($this->query);
             foreach ($result as $row) {
                 $this->_values[] = $row['total'];
                 $this->_legend[] = $row['product_name'];
@@ -453,7 +453,7 @@ class statsproduct extends ModuleGraph
     protected function setAllTimeValues($layers)
     {
         for ($i = 0; $i < $layers; ++$i) {
-            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
+            $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
             foreach ($result as $row) {
                 $this->_values[$i][(int) substr($row['date_add'], 0, 4)] += $row['total'];
             }
@@ -463,7 +463,7 @@ class statsproduct extends ModuleGraph
     protected function setYearValues($layers)
     {
         for ($i = 0; $i < $layers; ++$i) {
-            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
+            $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
             foreach ($result as $row) {
                 $this->_values[$i][(int) substr($row['date_add'], 5, 2)] += $row['total'];
             }
@@ -473,7 +473,7 @@ class statsproduct extends ModuleGraph
     protected function setMonthValues($layers)
     {
         for ($i = 0; $i < $layers; ++$i) {
-            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
+            $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
             foreach ($result as $row) {
                 $this->_values[$i][(int) substr($row['date_add'], 8, 2)] += $row['total'];
             }
@@ -483,7 +483,7 @@ class statsproduct extends ModuleGraph
     protected function setDayValues($layers)
     {
         for ($i = 0; $i < $layers; ++$i) {
-            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
+            $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($this->query[$i]);
             foreach ($result as $row) {
                 $this->_values[$i][(int) substr($row['date_add'], 11, 2)] += $row['total'];
             }
