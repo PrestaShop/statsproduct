@@ -264,7 +264,7 @@ class statsproduct extends ModuleGraph
                 foreach ($sales as $sale) {
                     $this->html .= '
 						<tr>
-							<td>' . Tools::displayDate($sale['date_add'], null, false) . '</td>
+							<td>' . Tools::displayDate($sale['date_add']) . '</td>
 							<td class="text-center"><a href="?tab=AdminOrders&id_order=' . $sale['id_order'] . '&vieworder&token=' . $token_order . '">' . (int) $sale['id_order'] . '</a></td>
 							<td class="text-center"><a href="?tab=AdminCustomers&id_customer=' . $sale['id_customer'] . '&viewcustomer&token=' . $token_customer . '">' . (int) $sale['id_customer'] . '</a></td>
 							' . ($has_attribute ? '<td>' . $sale['product_name'] . '</td>' : '') . '
