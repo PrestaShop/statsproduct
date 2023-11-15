@@ -4,6 +4,18 @@
 
 Enrich your stats, add detailed statistics for each product of your catalog.
 
+## Compatibility
+
+PrestaShop: `1.7.6.0` or later
+
+## How to test
+
+Link to specs : https://docs.prestashop-project.org/functional-documentation/functional-documentation/ux-ui/back-office/sell/stats/product-details-statsproduct
+
+Link to test scenario : https://build.prestashop-project.org/test-scenarios/scenarios/modules/statsproduct.html
+
+If the module is enabled, check that the interface Product details will be displayed in the Stats page in the Back-Office.
+
 ## Reporting issues
 
 You can report issues with this module in the main PrestaShop repository. [Click here to report an issue][report-issue]. 
