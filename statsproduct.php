@@ -38,7 +38,7 @@ class statsproduct extends ModuleGraph
     {
         $this->name = 'statsproduct';
         $this->tab = 'administration';
-        $this->version = '2.1.2';
+        $this->version = '2.1.3';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -265,8 +265,8 @@ class statsproduct extends ModuleGraph
                     $this->html .= '
 						<tr>
 							<td>' . Tools::displayDate($sale['date_add']) . '</td>
-							<td class="text-center"><a href="?tab=AdminOrders&id_order=' . $sale['id_order'] . '&vieworder&token=' . $token_order . '">' . (int) $sale['id_order'] . '</a></td>
-							<td class="text-center"><a href="?tab=AdminCustomers&id_customer=' . $sale['id_customer'] . '&viewcustomer&token=' . $token_customer . '">' . (int) $sale['id_customer'] . '</a></td>
+							<td class="text-center"><a href="?controller=AdminOrders&id_order=' . $sale['id_order'] . '&vieworder&token=' . $token_order . '">' . (int) $sale['id_order'] . '</a></td>
+							<td class="text-center"><a href="?controller=AdminCustomers&id_customer=' . $sale['id_customer'] . '&viewcustomer&token=' . $token_customer . '">' . (int) $sale['id_customer'] . '</a></td>
 							' . ($has_attribute ? '<td>' . $sale['product_name'] . '</td>' : '') . '
 							<td>' . (int) $sale['product_quantity'] . '</td>
 							<td>' . $this->context->getCurrentLocale()->formatPrice($sale['total'], $currency->iso_code) . '</td>
@@ -301,7 +301,7 @@ class statsproduct extends ModuleGraph
                     foreach ($cross_selling as $selling) {
                         $this->html .= '
 							<tr>
-								<td><a href="?tab=AdminProducts&id_product=' . (int) $selling['id_product'] . '&addproduct&token=' . $token_products . '">' . $selling['pname'] . '</a></td>
+								<td><a href="?controller=AdminProducts&id_product=' . (int) $selling['id_product'] . '&addproduct&token=' . $token_products . '">' . $selling['pname'] . '</a></td>
 								<td class="text-center">' . (int) $selling['pqty'] . '</td>
 								<td class="text-right">' . $this->context->getCurrentLocale()->formatPrice($selling['pprice'], $currency->iso_code) . '</td>
 							</tr>';
