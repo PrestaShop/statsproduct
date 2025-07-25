@@ -257,14 +257,12 @@ class statsproduct extends ModuleGraph
 							</tr>
 						</thead>
 						<tbody>';
-                $token_order = Tools::getAdminToken('AdminOrders' . (int) Tab::getIdFromClassName('AdminOrders') . (int) $this->context->employee->id);
-                $token_customer = Tools::getAdminToken('AdminCustomers' . (int) Tab::getIdFromClassName('AdminCustomers') . (int) $this->context->employee->id);
                 foreach ($sales as $sale) {
                     $this->html .= '
 						<tr>
 							<td>' . Tools::displayDate($sale['date_add']) . '</td>
-							<td class="text-center"><a href="?controller=AdminOrders&id_order=' . $sale['id_order'] . '&vieworder&token=' . $token_order . '">' . (int) $sale['id_order'] . '</a></td>
-							<td class="text-center"><a href="?controller=AdminCustomers&id_customer=' . $sale['id_customer'] . '&viewcustomer&token=' . $token_customer . '">' . (int) $sale['id_customer'] . '</a></td>
+							<td class="text-center"><a href="' . $this->context->link->getAdminLink('AdminOrders', true) . '&id_order=' . $sale['id_order'] . '&vieworder">' . (int) $sale['id_order'] . '</a></td>
+							<td class="text-center"><a href="' . $this->context->link->getAdminLink('AdminCustomers', true) . '&id_customer=' . $sale['id_customer'] . '&viewcustomer">' . (int) $sale['id_customer'] . '</a></td>
 							' . ($has_attribute ? '<td>' . $sale['product_name'] . '</td>' : '') . '
 							<td>' . (int) $sale['product_quantity'] . '</td>
 							<td>' . $this->context->getCurrentLocale()->formatPrice($sale['total'], $currency->iso_code) . '</td>
@@ -295,11 +293,10 @@ class statsproduct extends ModuleGraph
 								</tr>
 							</thead>
 						<tbody>';
-                    $token_products = Tools::getAdminToken('AdminProducts' . (int) Tab::getIdFromClassName('AdminProducts') . (int) $this->context->employee->id);
                     foreach ($cross_selling as $selling) {
                         $this->html .= '
 							<tr>
-								<td><a href="?controller=AdminProducts&id_product=' . (int) $selling['id_product'] . '&addproduct&token=' . $token_products . '">' . $selling['pname'] . '</a></td>
+								<td><a href="' . $this->context->link->getAdminLink('AdminProducts', true) . '&id_product=' . (int) $selling['id_product'] . '&addproduct">' . $selling['pname'] . '</a></td>
 								<td class="text-center">' . (int) $selling['pqty'] . '</td>
 								<td class="text-right">' . $this->context->getCurrentLocale()->formatPrice($selling['pprice'], $currency->iso_code) . '</td>
 							</tr>';
@@ -349,11 +346,16 @@ class statsproduct extends ModuleGraph
 				<tbody>';
 
             foreach ($this->getProducts($this->context->language->id) as $product) {
+
+                        // VZOR
+        $ru = $this->context->link->getAdminLink('AdminStats', true) . '&module=' . $this->name;
+        // VZOR
+
                 $this->html .= '
 				<tr>
 					<td>' . $product['reference'] . '</td>
 					<td>
-						<a href="' . Tools::safeOutput(AdminController::$currentIndex . '&token=' . Tools::getValue('token') . '&module=' . $this->name . '&id_product=' . $product['id_product']) . '">' . $product['name'] . '</a>
+						<a href="' . Tools::safeOutput($this->context->link->getAdminLink('AdminStats', true) . '&module=' . $this->name . '&id_product=' . $product['id_product']) . '">' . $product['name'] . '</a>
 					</td>
 					<td>' . $product['quantity'] . '</td>
 				</tr>';
