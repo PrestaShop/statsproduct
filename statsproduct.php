@@ -346,7 +346,6 @@ class statsproduct extends ModuleGraph
 				<tbody>';
 
             foreach ($this->getProducts($this->context->language->id) as $product) {
-
                 $this->html .= '
 				<tr>
 					<td>' . $product['reference'] . '</td>
