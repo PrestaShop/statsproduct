@@ -347,10 +347,6 @@ class statsproduct extends ModuleGraph
 
             foreach ($this->getProducts($this->context->language->id) as $product) {
 
-                        // VZOR
-        $ru = $this->context->link->getAdminLink('AdminStats', true) . '&module=' . $this->name;
-        // VZOR
-
                 $this->html .= '
 				<tr>
 					<td>' . $product['reference'] . '</td>
