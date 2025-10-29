@@ -296,7 +296,7 @@ class statsproduct extends ModuleGraph
                     foreach ($cross_selling as $selling) {
                         $this->html .= '
 							<tr>
-								<td><a href="' . $this->context->link->getAdminLink('AdminProducts', true, [], ['id_product'    => (int) $selling['id_product'], 'updateproduct' => 1]) . '">' . $selling['pname'] . '</a></td>
+								<td><a href="' . $this->context->link->getAdminLink('AdminProducts', true, [], ['id_product' => (int) $selling['id_product'], 'updateproduct' => 1]) . '">' . $selling['pname'] . '</a></td>
 								<td class="text-center">' . (int) $selling['pqty'] . '</td>
 								<td class="text-right">' . $this->context->getCurrentLocale()->formatPrice($selling['pprice'], $currency->iso_code) . '</td>
 							</tr>';
